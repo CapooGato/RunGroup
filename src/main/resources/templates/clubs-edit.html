@@ -1,0 +1,53 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.bet.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"> <!-- Dziediczy z "layout.html"-->
+<body class="d-flex flex-column h-100">
+<head>
+    <title>Club Edit</title>
+</head>
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}" class="row g-3">
+                <input type="hidden" th:field="*{id}"> <!-- Niby useless bo i tak ustawiamy w kontrolerze, ale jawnie pokazuje że działamy na istniejącym obiekcie
+                                                            i przakazujemy również id do kontrolera poprzez formularz-->
+                <div class="col-md-6">
+                    <label for="title" class="form-label">Title</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            th:field="*{title}"
+                            id="title"
+                            placeholder="Title">
+                </div>
+                <div class="col-md-6">
+                    <label for="photoUrl" class="form-label">Photo Url</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            name="photoUrl"
+                            th:field="*{photoUrl}"
+                            id="photoUrl"
+                            placeholder="Photo Url">
+                </div>
+                <div class="col-12">
+                    <label for="content" class="form-label">Content</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            name="content"
+                            th:field="*{content}"
+                            id="content"
+                            placeholder="content">
+                </div>
+                <div class="col-12 mb-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>
