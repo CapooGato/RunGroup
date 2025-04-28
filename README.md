@@ -1,8 +1,8 @@
 # Web app in Java + Thymeleaf for runners
 
 ## So far I've made:
-Main page displaying runners:
-![obraz](https://github.com/user-attachments/assets/cd521f64-3f34-4070-a7fa-81127ce52040)
+Main page displaying runners form searchbar:
+![obraz](https://github.com/user-attachments/assets/6ddc95ac-0a4c-4073-ac2a-c266a4e8cab5)
 
 Edit form:
 ![obraz](https://github.com/user-attachments/assets/d71d9aae-8bde-47ba-9692-742a2a24b50e)
