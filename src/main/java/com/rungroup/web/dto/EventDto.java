@@ -28,4 +28,6 @@ public class EventDto {
 
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+
+    private Club club;  /* It should be clubDto, but im following tutorial so meow*/
 }

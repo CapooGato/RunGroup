@@ -81,8 +81,10 @@ public class ClubController {
     @PostMapping(value = "/clubs/{clubId}/edit") // can't use <form method="put"..> btw, only GET or POST
     public String updateClub(@PathVariable("clubId") Long clubId,
                              @Valid @ModelAttribute("club") ClubDto club,
-                             BindingResult result) {
+                             BindingResult result,
+                             Model model) {
         if(result.hasErrors()){
+            model.addAttribute("club", club);
             return "clubs-edit";
         }
         club.setId(clubId);
