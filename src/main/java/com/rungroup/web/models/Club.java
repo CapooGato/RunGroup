@@ -24,6 +24,7 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String photoUrl;
     private String content;
@@ -35,5 +36,6 @@ public class Club {
     private LocalDateTime updatedOn;
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Event> events = new ArrayList<>();
+    private List<Event> events = new ArrayList<>(); // When EAGER loading, it hould be inicialised, otherwise it may return null
+                                                    // while with LAZY loading it's not necessary, cuz Hibernate will inicialise it
 }
