@@ -2,7 +2,10 @@ package com.rungroup.web.service.impl;
 
 import com.rungroup.web.dto.ClubDto;
 import com.rungroup.web.models.Club;
+import com.rungroup.web.models.UserEntity;
 import com.rungroup.web.repository.ClubRepository;
+import com.rungroup.web.repository.UserRepository;
+import com.rungroup.web.security.SecurityUtil;
 import com.rungroup.web.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,12 @@ import static com.rungroup.web.mapper.ClubMapper.mapToDto;
 public class ClubServiceImpl implements ClubService {
 
     private final ClubRepository clubRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public ClubServiceImpl(ClubRepository clubRepository) {
+    public ClubServiceImpl(ClubRepository clubRepository, UserRepository userRepository) {
         this.clubRepository = clubRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -31,7 +36,13 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public ClubDto saveClub(ClubDto clubDto) {
+        /* Pobieramy username aktualnego użytkownika */
+       String username = SecurityUtil.getSessionUser();
+       UserEntity user = userRepository.findByUsername(username);
+
        Club newClub = mapToClub(clubDto);
+       /* Ustawiamy aktualnego użytkownika w sesji jako twórce klubu który teraz tworzymy */
+       newClub.setCreatedBy(user);
        Club savedClub = clubRepository.save(newClub);
        return mapToDto(savedClub);
     }
@@ -44,7 +55,10 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public void updateClub(ClubDto clubDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
+        club.setCreatedBy(user);
         clubRepository.save(club);
     }
 

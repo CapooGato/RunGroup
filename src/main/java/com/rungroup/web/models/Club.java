@@ -35,6 +35,10 @@ public class Club {
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
+
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Event> events = new ArrayList<>(); // When EAGER loading, it hould be inicialised, otherwise it may return null
                                                     // while with LAZY loading it's not necessary, cuz Hibernate will inicialise it

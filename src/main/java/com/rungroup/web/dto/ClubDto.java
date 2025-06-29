@@ -1,5 +1,6 @@
 package com.rungroup.web.dto;
 
+import com.rungroup.web.models.UserEntity;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,8 @@ public class ClubDto {
 
     @NotEmpty(message = "Content should not be empty")
     private String content;
+
+    private UserEntity createdBy;
 
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
